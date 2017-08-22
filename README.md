@@ -23,7 +23,7 @@ const loader = new MongoToSqs({
   queueUrl,
   formatPayload,
   sqsBatchSize,
-  mongoConcurrency
+  concurrency // default 2500
 });
 
 loader.start().then(() => console.log('Done.'));
