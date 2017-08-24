@@ -1,6 +1,6 @@
 # mongo-to-sqs
 
-Send 
+Send a large number of MongoDB documents to an AWS SQS queue.
 
 [![Build Status](https://travis-ci.org/WW-Digital/node-mongo-to-sqs.svg?branch=master)](https://travis-ci.org/WW-Digital/node-mongo-to-sqs)
 
