@@ -9,6 +9,7 @@ const numDocs = 300000;
 const checkpoint = 10000;
 const sqsLatency = 500;
 const sqs = new MockSQS({ latency: sqsLatency });
+const data = 'X'.repeat(10000);
 
 function logCheckpoint(i) {
   if (i % 100000 === 0) {
@@ -27,7 +28,7 @@ MongoDB.MongoClient.connect(conn).then(db => {
       function insertTestDocs() {
         const doc = {
           value: i,
-          data: 'xxxxxxxxxx'.repeat(1000)
+          data
         };
         return db.collection(collectionName).insert(doc).then(() => {
           i++;
@@ -69,4 +70,8 @@ MongoDB.MongoClient.connect(conn).then(db => {
   ok(payload.customProperty === 123, 'customProperty');
   console.log(`\ndone in ${loadDuration}`);
   process.exit(0);
+})
+.catch(err => {
+  console.log(err);
+  process.exit(1);
 });
