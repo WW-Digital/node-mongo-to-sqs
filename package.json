@@ -18,5 +18,8 @@
   "homepage": "https://github.com/WW-Digital/node-mongo-to-sqs#readme",
   "dependencies": {
     "through2-concurrent": "^1.1.1"
+  },
+  "devDependencies": {
+    "mongodb": "^2.2.31"
   }
 }
