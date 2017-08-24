@@ -5,16 +5,16 @@ const ok = require('assert').ok;
 
 const conn = 'mongodb://localhost:27017/test-mongo-to-sqs';
 const collectionName = 'my-collection';
-const numDocs = 300000;
+const numDocs = 250000;
 const checkpoint = 10000;
 const sqsLatency = 500;
 const sqs = new MockSQS({ latency: sqsLatency });
 const data = 'X'.repeat(10000);
 
 function logCheckpoint(i) {
-  if (i % 100000 === 0) {
-    const n = i / 100000;
-    process.stdout.write(`${n}00k`);
+  if (i % 50000 === 0) {
+    const n = i / 50000;
+    process.stdout.write(`${n*50}k`);
   } else if (i % checkpoint === 0) {
     process.stdout.write('.');
   }
