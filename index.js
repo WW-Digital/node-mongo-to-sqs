@@ -16,10 +16,7 @@ class MongoToSqs {
       MessageBody: JSON.stringify(payload),
       DelaySeconds: 0,
       QueueUrl: this.queueUrl
-    }).promise()
-      .then(() => {
-        console.log('sent:', payload);
-      });
+    }).promise();
   }
 
   start() {
