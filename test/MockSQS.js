@@ -11,7 +11,7 @@ class MockSQS {
     return {
       promise: () => {
         return new Promise(resolve => {
-          setTimeout(resolve, this.latency);
+          setTimeout(resolve, this.latency + Math.random());
         });
       }
     };

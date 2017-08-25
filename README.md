@@ -24,7 +24,7 @@ const loader = new MongoToSqs({
   sqs,            // new AWS.SQS()
   queueUrl,       // the url of the SQS queue
   formatPayload,  // sync function to transform the document into the SQS MessageBody
-  concurrency     // defaults to 2500 documents to be sent in parallel
+  concurrency     // number of concurrent SQS requests (default: 2500)
 });
 
 loader.start().then(() => console.log('Done.'));

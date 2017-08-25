@@ -7,7 +7,7 @@ const conn = 'mongodb://localhost:27017/test-mongo-to-sqs';
 const collectionName = 'my-collection';
 const numDocs = 250000;
 const checkpoint = 10000;
-const sqsLatency = 500;
+const sqsLatency = 1500;
 const sqs = new MockSQS({ latency: sqsLatency });
 const data = 'X'.repeat(10000);
 
@@ -43,7 +43,7 @@ MongoDB.MongoClient.connect(conn).then(db => {
       console.log(`Inserting ${numDocs} docs`);
       return insertTestDocs()
       .then(insertDuration => {
-        console.log(`\ndone in ${insertDuration}.`);
+        console.log(`\nDone in ${insertDuration}.`);
         const cursor = db.collection(collectionName).find();
         const loader = new MongoToSqs({
           cursor,
@@ -56,8 +56,9 @@ MongoDB.MongoClient.connect(conn).then(db => {
           queueUrl: 'https://example.com/000000000000/my-queue'
         });
         const loadStart = new Date;
-        console.log(`Sending ${numDocs} mongo docs to sqs with a ${sqsLatency}ms SQS latency`);
+        console.log(`Sending ${numDocs} mongo docs to SQS with a ${sqsLatency}ms SQS latency`);
         return loader.start().then(() => {
+          ok(sqs.messageCount === numDocs, 'messageCount');
           return (new Date - loadStart) + 'ms';
         });
       });
@@ -66,9 +67,8 @@ MongoDB.MongoClient.connect(conn).then(db => {
 })
 .then(loadDuration => {
   const payload = JSON.parse(sqs.lastMessage.MessageBody);
-  ok(sqs.messageCount === numDocs, 'messageCount');
   ok(payload.customProperty === 123, 'customProperty');
-  console.log(`\ndone in ${loadDuration}`);
+  console.log(`\nDone in ${loadDuration} without running out of memory.`);
   process.exit(0);
 })
 .catch(err => {
