@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "6"
+  - "node"
+addons:
+  apt:
+    sources:
+      - mongodb-upstart
+      - mongodb-3.2-trusty
+    packages:
+      - mongodb-org-server
+      - mongodb-org-shell
+services:
+  - mongodb

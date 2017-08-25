@@ -1,0 +1,25 @@
+{
+  "name": "mongo-to-sqs",
+  "version": "1.0.0",
+  "description": "Send MongoDB documents to SQS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test --max-old-space-size=1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WW-Digital/node-mongo-to-sqs.git"
+  },
+  "author": "@WW-Digital",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WW-Digital/node-mongo-to-sqs/issues"
+  },
+  "homepage": "https://github.com/WW-Digital/node-mongo-to-sqs#readme",
+  "dependencies": {
+    "through2-concurrent": "^1.1.1"
+  },
+  "devDependencies": {
+    "mongodb": "^2.2.31"
+  }
+}
