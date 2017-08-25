@@ -68,7 +68,7 @@ MongoDB.MongoClient.connect(conn).then(db => {
 .then(loadDuration => {
   const payload = JSON.parse(sqs.lastMessage.MessageBody);
   ok(payload.customProperty === 123, 'customProperty');
-  console.log(`\nDone in ${loadDuration} without running out of memory.`);
+  console.log(`\nDone in ${loadDuration}.`);
   process.exit(0);
 })
 .catch(err => {

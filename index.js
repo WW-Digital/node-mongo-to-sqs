@@ -26,7 +26,11 @@ class MongoToSqs {
     }
     this.started = true;
     let count = 0;
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
+      this.cursor.on('error', reject);
+      this.cursor.on('end', () => {
+        this.cursorEnd = true;
+      });
       const handleSQSResponse = (done) => {
         count -= 1;
         done();
@@ -49,10 +53,6 @@ class MongoToSqs {
             handleSQSResponse(done);
           });
       }));
-      // done reading from mongo collection
-      this.cursor.on('end', () => {
-        this.cursorEnd = true;
-      });
     });
   }
 
