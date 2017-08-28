@@ -43,7 +43,8 @@ MongoDB.MongoClient.connect().then(db => {
   
   const sqs = new AWS.SQS({
     accessKeyId: '...',
-    secretAccessKey: '...'
+    secretAccessKey: '...',
+    region: 'us-east-1'
   });
   
   const loader = new MongoToSqs({
