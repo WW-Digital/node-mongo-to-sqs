@@ -1,0 +1,13 @@
+#WW Properties
+
+#This product support applications that are end-user facing
+sec_exposure=Internal
+
+#Expecting high SLA
+sec_critical_system=False
+
+#Owned by CMX team
+sec_owner=CMX
+
+#Github Repo Name
+sec_repository=node-mongo-to-sqs
